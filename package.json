@@ -1,0 +1,48 @@
+{
+    "name": "vsc-space-block-jumper",
+    "displayName": "Space Block Jumper",
+    "description": "Jump vertically across space-separated blocks.",
+    "version": "1.0.0",
+    "publisher": "jmfirth",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:spaceBlockJumper.moveUp",
+        "onCommand:spaceBlockJumper.moveDown",
+        "onCommand:spaceBlockJumper.selectUp",
+        "onCommand:spaceBlockJumper.selectDown"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [{
+            "command": "spaceBlockJumper.moveUp",
+            "title": "Space Block Jumper: Move Up"
+        },{
+            "command": "spaceBlockJumper.moveDown",
+            "title": "Space Block Jumper: Move Down"
+        },{
+            "command": "spaceBlockJumper.selectUp",
+            "title": "Space Block Jumper: Select Up"
+        },{
+            "command": "spaceBlockJumper.selectDown",
+            "title": "Space Block Jumper: Select Down"
+        }]
+    },
+    "scripts": {
+        "vscode:prepublish": "tsc -p ./",
+        "compile": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.0.3",
+        "vscode": "^1.0.0",
+        "mocha": "^2.3.3",
+        "@types/node": "^6.0.40",
+        "@types/mocha": "^2.2.32"
+    }
+}
