@@ -2,7 +2,7 @@
     "name": "vsc-space-block-jumper",
     "displayName": "Space Block Jumper",
     "description": "Jump vertically across space-separated blocks.",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "publisher": "jmfirth",
     "engines": {
         "vscode": "^1.5.0"
@@ -18,19 +18,24 @@
     ],
     "main": "./out/src/extension",
     "contributes": {
-        "commands": [{
-            "command": "spaceBlockJumper.moveUp",
-            "title": "Space Block Jumper: Move Up"
-        },{
-            "command": "spaceBlockJumper.moveDown",
-            "title": "Space Block Jumper: Move Down"
-        },{
-            "command": "spaceBlockJumper.selectUp",
-            "title": "Space Block Jumper: Select Up"
-        },{
-            "command": "spaceBlockJumper.selectDown",
-            "title": "Space Block Jumper: Select Down"
-        }]
+        "commands": [
+            {
+                "command": "spaceBlockJumper.moveUp",
+                "title": "Space Block Jumper: Move Up"
+            },
+            {
+                "command": "spaceBlockJumper.moveDown",
+                "title": "Space Block Jumper: Move Down"
+            },
+            {
+                "command": "spaceBlockJumper.selectUp",
+                "title": "Space Block Jumper: Select Up"
+            },
+            {
+                "command": "spaceBlockJumper.selectDown",
+                "title": "Space Block Jumper: Select Down"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
