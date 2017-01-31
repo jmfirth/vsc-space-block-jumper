@@ -17,6 +17,14 @@ None at this time.
 
 ## Release Notes
 
+### 1.2.0
+
+Code cleanup
+
+### 1.1.0
+
+Minor
+
 ### 1.0.0
 
 Initial release

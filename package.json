@@ -1,7 +1,7 @@
 {
     "name": "vsc-space-block-jumper",
     "displayName": "Space Block Jumper",
-    "description": "Jump vertically across space-separated blocks.",
+    "description": "Jump vertically across space-delimited blocks.",
     "version": "1.1.0",
     "publisher": "jmfirth",
     "engines": {
