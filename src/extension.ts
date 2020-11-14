@@ -6,7 +6,6 @@ import * as vscode from "vscode";
 function nextPosition(document: vscode.TextDocument, position: vscode.Position, up: boolean = false): number {
     const step = up ? -1 : 1;
     const boundary = up ? 0 : document.lineCount - 1;
-    let index = position.line + step;
     if (position.line === boundary) return position.line;
     return afterBlock(document, step, boundary, position.line);
 }
@@ -18,43 +17,40 @@ function afterBlock(document: vscode.TextDocument, step: number, boundary: numbe
         : afterBlock(document, step, boundary, index + step, startedBlock || !line.isEmptyOrWhitespace);
 }
 
-function anchorPosition(selection: vscode.Selection) {
-    return selection.active.line === selection.end.line ? selection.start : selection.end
+function updateSelection(selection: vscode.Selection, next: number, anchor?: vscode.Position) {
+        const active = selection.active.with(next, 0);
+        return new vscode.Selection(anchor || active, active);
 }
 
-function markSelection(editor: vscode.TextEditor, next: number, anchor?: vscode.Position) {
-        const active = editor.selection.active.with(next, 0);
-        editor.selection = new vscode.Selection(anchor || active, active);
-        editor.revealRange(new vscode.Range(active, active));
+function jump(up: boolean = false, select: boolean = false) {
+    const editor = vscode.window.activeTextEditor;
+    const newSelections = []
+    for (let index = 0; index < editor.selections.length; index++) {
+        const selection = editor.selections[index];
+        const anchor = select ? selection.anchor : undefined
+        const updated = updateSelection(editor, nextPosition(editor.document, selection.active, up), anchor);
+        newSelections.push(updated);
+    }
+    editor.selections = newSelections;
+    const s0 = editor.selection;
+    editor.revealRange(new vscode.Range(s0.active, s0.active));
 }
 
 export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand("spaceBlockJumper.moveUp", () => {
-        const editor = vscode.window.activeTextEditor;
-        markSelection(editor, nextPosition(editor.document, editor.selection.active, true));
+        jump(true, false);
     }));
 
     context.subscriptions.push(vscode.commands.registerCommand("spaceBlockJumper.moveDown", () => {
-        const editor = vscode.window.activeTextEditor;
-        markSelection(editor, nextPosition(editor.document, editor.selection.active, false));
+        jump(false, false);
     }));
 
     context.subscriptions.push(vscode.commands.registerCommand("spaceBlockJumper.selectUp", () => {
-        const editor = vscode.window.activeTextEditor;
-        markSelection(
-            editor,
-            nextPosition(editor.document, editor.selection.active, true),
-            anchorPosition(editor.selection)
-        );
+        jump(true, true);
     }));
 
     context.subscriptions.push(vscode.commands.registerCommand("spaceBlockJumper.selectDown", () => {
-        const editor = vscode.window.activeTextEditor;
-        markSelection(
-            editor,
-            nextPosition(editor.document, editor.selection.active, false),
-            anchorPosition(editor.selection)
-        );
+        jump(false, true);
     }));
 }
 
