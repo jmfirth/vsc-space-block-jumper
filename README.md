@@ -17,6 +17,10 @@ None at this time.
 
 ## Release Notes
 
+### 2.0.1
+
+Enable web extension
+
 ### 2.0.0
 
 Update to web extension

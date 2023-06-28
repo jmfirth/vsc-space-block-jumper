@@ -4,7 +4,7 @@
   "description": "Jump vertically across space-delimited blocks.",
   "license": "MIT",
   "repository": "github:jmfirth/vsc-space-block-jumper",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "publisher": "jmfirth",
   "engines": {
     "vscode": "^1.79.0"
@@ -14,6 +14,7 @@
   ],
   "activationEvents": [],
   "main": "./dist/extension.js",
+  "browser": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
