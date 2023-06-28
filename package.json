@@ -1,57 +1,66 @@
 {
-    "name": "vsc-space-block-jumper",
-    "displayName": "Space Block Jumper",
-    "description": "Jump vertically across space-delimited blocks.",
-    "version": "1.2.2",
-    "publisher": "jmfirth",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/jmfirth/vsc-space-block-jumper.git"
-    },
-    "engines": {
-        "vscode": "^1.5.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onCommand:spaceBlockJumper.moveUp",
-        "onCommand:spaceBlockJumper.moveDown",
-        "onCommand:spaceBlockJumper.selectUp",
-        "onCommand:spaceBlockJumper.selectDown"
-    ],
-    "main": "./out/src/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "spaceBlockJumper.moveUp",
-                "title": "Space Block Jumper: Move Up"
-            },
-            {
-                "command": "spaceBlockJumper.moveDown",
-                "title": "Space Block Jumper: Move Down"
-            },
-            {
-                "command": "spaceBlockJumper.selectUp",
-                "title": "Space Block Jumper: Select Up"
-            },
-            {
-                "command": "spaceBlockJumper.selectDown",
-                "title": "Space Block Jumper: Select Down"
-            }
-        ]
-    },
-    "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
-        "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
-    }
+  "name": "vsc-space-block-jumper",
+  "displayName": "Space Block Jumper",
+  "description": "Jump vertically across space-delimited blocks.",
+  "version": "2.0.0",
+  "publisher": "jmfirth",
+  "engines": {
+    "vscode": "^1.79.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "spaceBlockJumper.moveUp",
+        "title": "Space Block Jumper: Move Up"
+      },
+      {
+        "command": "spaceBlockJumper.moveDown",
+        "title": "Space Block Jumper: Move Down"
+      },
+      {
+        "command": "spaceBlockJumper.selectUp",
+        "title": "Space Block Jumper: Select Up"
+      },
+      {
+        "command": "spaceBlockJumper.selectDown",
+        "title": "Space Block Jumper: Select Down"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "20.2.5",
+    "@types/vscode": "^1.79.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "@vscode/test-electron": "^2.3.2",
+    "eslint": "^8.41.0",
+    "glob": "^8.1.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.2",
+    "mocha": "^10.2.0",
+    "prettier": "^2.8.8",
+    "ts-loader": "^9.4.3",
+    "typescript": "^5.1.3",
+    "webpack": "^5.85.0",
+    "webpack-cli": "^5.1.1"
+  }
 }
