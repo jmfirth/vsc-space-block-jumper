@@ -2,6 +2,8 @@
   "name": "vsc-space-block-jumper",
   "displayName": "Space Block Jumper",
   "description": "Jump vertically across space-delimited blocks.",
+  "license": "MIT",
+  "repository": "github:jmfirth/vsc-space-block-jumper",
   "version": "2.0.0",
   "publisher": "jmfirth",
   "engines": {
